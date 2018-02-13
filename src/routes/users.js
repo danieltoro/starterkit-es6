@@ -6,26 +6,26 @@
 import { Router } from 'express';
 
 // Import Controller
-import UsersCtrl from '../controllers/userController';
+import UserController from '../controllers/userController';
 
 // Validations
-import { validateBody, schemas } from '../helpers/validations';
+import validations from '../helpers/validations';
 
 // Create a Express Router instance
 const routes = new Router();
 
 routes.post(
   '/signup',
-  validateBody(schemas.authSchema),
-  UsersCtrl.signUp
+  validations.signUp,
+  UserController.signUp
 );
 routes.post(
   '/signin',
-  UsersCtrl.signIn
+  UserController.signIn
 );
 routes.get(
   '/secret',
-  UsersCtrl.secret
+  UserController.secret
 );
 
 export default routes;

@@ -15,7 +15,7 @@ import './config/database';
 import app from './app';
 
 // Starting the Server
-app.listen(constants.PORT, (err) => {
+app.listen(constants.PORT, err => {
   if (err) {
     console.log(chalk.red(`
       Cannot run! 😱
