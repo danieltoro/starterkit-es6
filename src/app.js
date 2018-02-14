@@ -12,8 +12,8 @@ import apiRoutes from './routes/v1';
 const app = express();
 
 // Middlewares
-express.json();
-express.urlencoded({ extended: true });
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 apiRoutes(app);

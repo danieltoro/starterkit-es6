@@ -9,14 +9,14 @@ import { Router } from 'express';
 import UserController from '../controllers/userController';
 
 // Validations
-import validations from '../helpers/validations';
+import { validateBody, schemas } from '../helpers/validations';
 
 // Create a Express Router instance
 const routes = new Router();
 
 routes.post(
   '/signup',
-  validations.signUp,
+  validateBody(schemas.authSchemas),
   UserController.signUp
 );
 routes.post(
