@@ -5,15 +5,22 @@
 // NPM Dependencies
 import mongoose, { Schema } from 'mongoose';
 
-
+// Create a Schema
 const userSchema = new Schema({
-  method: {
-    type: String
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
   },
-  local: {
-    email: {},
-    password: {}
+  password: {
+    type: String,
+    required: true
   }
 });
 
-export default mongoose.model('User', userSchema);
+// Create a Model
+const User = mongoose.model('User', userSchema);
+
+// Export the Model
+export default User;
