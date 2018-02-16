@@ -45,6 +45,7 @@ export default {
     console.log('UsersCtrl.signIn() Called!');
   },
   secret: async (req, res, next) => {
-    console.log('UsersCtrl.secret() Called!');
+    console.log('I managed to get here!');
+    res.json({ secret: 'resource' });
   },
 };
