@@ -18,7 +18,7 @@ export function validateBody(schema) {
 }
 
 export const schemas = {
-  authSchemas: Joi.object().keys({
+  authSchema: Joi.object().keys({
     email: Joi.string()
       .email()
       .required(),
