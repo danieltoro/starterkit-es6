@@ -9,10 +9,8 @@ import mongoose, { Schema } from 'mongoose';
 const postSchema = new Schema({
   title: {
     type: String,
-    trim: true,
     required: [true, 'Title is required!'],
     minlength: [3, 'Title need to be longer!'],
-    unique: true,
   },
   text: {
     type: String,
@@ -30,8 +28,18 @@ const postSchema = new Schema({
   }
 }, { timestamps: true });
 
-// Create the model
-const Post = mongoose.model('Post', postSchema);
+postSchema.methods = {
+  toJSON() {
+    return {
+      _id: this._id,
+      title: this.title,
+      text: this.text,
+      createdAt: this.createdAt,
+      user: this.user,
+      favoriteCount: this.favoriteCount
+    };
+  }
+};
 
 postSchema.statics = {
   createPost(args, user) {
@@ -41,6 +49,9 @@ postSchema.statics = {
     });
   },
 };
+
+// Create the model
+const Post = mongoose.model('Post', postSchema);
 
 // Export the model
 export default Post;

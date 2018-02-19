@@ -9,7 +9,7 @@ import { Router } from 'express';
 import UserController from '../controllers/userController';
 
 // Validations
-import { validateBody, schemas } from '../helpers/validations';
+import { validateBody, schemas } from '../helpers/user.validations';
 
 import { authJwt, authLocal, authGoogle, authFacebook } from '../services/passport';
 

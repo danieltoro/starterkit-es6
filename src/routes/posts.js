@@ -6,7 +6,7 @@
 import { Router } from 'express';
 
 // Import Controller
-import * as postController from '../controllers/postController';
+import postController from '../controllers/postController';
 
 import { authJwt } from '../services/passport';
 
@@ -17,6 +17,10 @@ routes.post(
   '/',
   authJwt,
   postController.createPost
+);
+routes.get(
+  '/:id',
+  postController.getById
 );
 
 export default routes;
