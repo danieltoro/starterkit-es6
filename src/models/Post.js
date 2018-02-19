@@ -20,12 +20,7 @@ const postSchema = new Schema({
     required: [true, 'Text is required!'],
     minlength: [10, 'Text need to be longer!'],
   },
-  slug: {
-    type: String,
-    trim: true,
-    lowercase: true,
-  },
-  author: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
@@ -33,10 +28,19 @@ const postSchema = new Schema({
     type: Number,
     default: 0,
   }
-});
+}, { timestamps: true });
 
 // Create the model
 const Post = mongoose.model('Post', postSchema);
+
+postSchema.statics = {
+  createPost(args, user) {
+    return this.create({
+      ...args,
+      user,
+    });
+  },
+};
 
 // Export the model
 export default Post;

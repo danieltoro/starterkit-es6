@@ -40,7 +40,7 @@ const userSchema = new Schema({
       lowercase: true
     }
   }
-});
+}, { timestamps: true });
 
 userSchema.pre('save', async function (next) {
   try {
