@@ -22,5 +22,10 @@ routes.get(
   '/:id',
   postController.getById
 );
+routes.get(
+  '/',
+  authJwt,
+  postController.getPostList
+);
 
 export default routes;

@@ -13,7 +13,7 @@ const devConfig = {
   JWT_SECRET: process.env.JWT_SECRET_DEV,
   oauth: {
     google: {
-      clientID: ' 1068368765143-cdl89bi0u9l6bbv574n3np1orppqc5ab.apps.googleusercontent.com',
+      clientID: '1068368765143-cdl89bi0u9l6bbv574n3np1orppqc5ab.apps.googleusercontent.com',
       clientSecret: 'Zkaeoo9dBx-Z505BIZX7tQMQ'
     },
     facebook: {

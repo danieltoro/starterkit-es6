@@ -58,16 +58,22 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-userSchema.methods.isValidPassword = async function (newPassword) {
-  try {
-    console.log('this.local.password: ', this.local.password);
-    console.log('new password: ', newPassword);
-    return await bcrypt.compare(newPassword, this.local.password);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+// userSchema.methods.isValidPassword = async function (newPassword) {
+//   try {
+//     return await bcrypt.compare(newPassword, this.local.password);
+//   } catch (error) {
+//     throw new Error(error);
+//   }s
+// };
+
 userSchema.methods = {
+  async isValidPassword(newPassword) {
+    try {
+      return await bcrypt.compare(newPassword, this.local.password);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
   toJSON() {
     return {
       _id: this._id,

@@ -19,5 +19,13 @@ export default {
     } catch (error) {
       return res.status(400).json(error);
     }
+  },
+  getPostList: async (req, res) => {
+    try {
+      const posts = await Post.find().populate('user');
+      return res.status(200).json(posts);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   }
 };

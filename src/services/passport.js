@@ -5,7 +5,7 @@ import LocalStrategy from 'passport-local';
 import GooglePlusTokenStrategy from 'passport-google-plus-token';
 import FacebookTokenStrategy from 'passport-facebook-token';
 
-
+// Import config file
 import constants from '../config/constants';
 
 // Import User Model
@@ -35,9 +35,35 @@ const jwtStrategy = new JwtStrategy(jwtOpts, async (payload, done) => {
 });
 
 // Local Strategy
-const localOpts = { usernameField: 'email' };
-
-const localStrategy = new LocalStrategy(localOpts, async (email, password, done) => {
+// const localOpts = { usernameField: 'email' };
+//
+// const localStrategy = new LocalStrategy(localOpts, async (email, password, done) => {
+//   try {
+//     // Find the user given the email
+//     const user = await User.findOne({ 'local.email': email });
+//
+//     // If not, handle it
+//     if (!user) {
+//       return done(null, false);
+//     }
+//
+//     // Check if the password is correct
+//     const isMatch = await user.isValidPassword(password);
+//
+//     // If not, handle it
+//     if (!isMatch) {
+//       return done(null, false);
+//     }
+//
+//     // Otherwise, return the user
+//     done(null, user);
+//   } catch (error) {
+//     done(error, false);
+//   }
+// });
+passport.use(new LocalStrategy({
+  usernameField: 'email'
+}, async (email, password, done) => {
   try {
     // Find the user given the email
     const user = await User.findOne({ "local.email": email });
@@ -60,7 +86,7 @@ const localStrategy = new LocalStrategy(localOpts, async (email, password, done)
   } catch (error) {
     done(error, false);
   }
-});
+}));
 
 // Google OAuth Strategy
 const googleOpts = {
@@ -129,7 +155,7 @@ const facebookStrategy = new FacebookTokenStrategy(facebookOpt, async (accessTok
 
 
 passport.use(jwtStrategy);
-passport.use(localStrategy);
+// passport.use(localStrategy);
 passport.use('googleToken', googleStrategy);
 passport.use('facebookToken', facebookStrategy);
 
