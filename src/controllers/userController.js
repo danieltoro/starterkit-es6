@@ -40,7 +40,7 @@ export default {
     // Create the token
     const token = signToken(newUser);
     // Respond with token
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
   },
   signIn: async (req, res, next) => {
     // Generate Token

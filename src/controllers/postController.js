@@ -32,7 +32,6 @@ export default {
     }
   },
   updatePost: async (req, res) => {
-    console.log('update posts');
     try {
       const post = await Post.findById(req.params.id);
       if (!post.user.equals(req.user._id)) {
@@ -47,5 +46,15 @@ export default {
     }
   },
   deletePost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      if (!post.user.equals(req.user._id)) {
+        return res.sendStatus(401);
+      }
+      await post.remove();
+      return res.sendStatus(200);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   },
 };
