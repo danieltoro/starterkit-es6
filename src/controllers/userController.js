@@ -23,13 +23,11 @@ export function signToken(user) {
 export default {
   signUp: async (req, res, next) => {
     const { email, password } = req.value.body;
-
     // Check if there is a user with the same email
-    const foundUser = await User.findOne({ "local.email": email });
+    const foundUser = await User.findOne({ 'local.email': email });
     if (foundUser) {
       return res.status(403).send({ error: 'Email is already taken' });
     }
-
     // Create a new User
     const newUser = new User({
       method: 'local',
@@ -39,10 +37,8 @@ export default {
       }
     });
     await newUser.save();
-
     // Create the token
     const token = signToken(newUser);
-
     // Respond with token
     res.status(200).json({ token });
   },
