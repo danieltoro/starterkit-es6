@@ -6,27 +6,30 @@
 import mongoose, { Schema } from 'mongoose';
 
 // Create the Schema
-const postSchema = new Schema({
-  title: {
-    type: String,
-    required: [true, 'Title is required!'],
-    minlength: [3, 'Title need to be longer!'],
+const postSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: [true, 'Title is required!'],
+      minlength: [3, 'Title need to be longer!'],
+    },
+    text: {
+      type: String,
+      trim: true,
+      required: [true, 'Text is required!'],
+      minlength: [10, 'Text need to be longer!'],
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    favoriteCount: {
+      type: Number,
+      default: 0,
+    },
   },
-  text: {
-    type: String,
-    trim: true,
-    required: [true, 'Text is required!'],
-    minlength: [10, 'Text need to be longer!'],
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  favoriteCount: {
-    type: Number,
-    default: 0,
-  }
-}, { timestamps: true });
+  { timestamps: true },
+);
 
 postSchema.methods = {
   toJSON() {
@@ -36,9 +39,9 @@ postSchema.methods = {
       text: this.text,
       createdAt: this.createdAt,
       user: this.user,
-      favoriteCount: this.favoriteCount
+      favoriteCount: this.favoriteCount,
     };
-  }
+  },
 };
 
 postSchema.statics = {

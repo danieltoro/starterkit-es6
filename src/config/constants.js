@@ -13,14 +13,15 @@ const devConfig = {
   JWT_SECRET: process.env.JWT_SECRET_DEV,
   oauth: {
     google: {
-      clientID: '1068368765143-cdl89bi0u9l6bbv574n3np1orppqc5ab.apps.googleusercontent.com',
-      clientSecret: 'Zkaeoo9dBx-Z505BIZX7tQMQ'
+      clientID:
+        '1068368765143-cdl89bi0u9l6bbv574n3np1orppqc5ab.apps.googleusercontent.com',
+      clientSecret: 'Zkaeoo9dBx-Z505BIZX7tQMQ',
     },
     facebook: {
       clientID: '147675959232441',
-      clientSecret: 'f20c3de3c8994c31fdd7d8d7eb3552a1'
-    }
-  }
+      clientSecret: 'f20c3de3c8994c31fdd7d8d7eb3552a1',
+    },
+  },
 };
 
 const testConfig = {
@@ -29,12 +30,10 @@ const testConfig = {
   oauth: {
     google: {
       clientID: '',
-      clientSecret: ''
+      clientSecret: '',
     },
-    facebook: {
-
-    }
-  }
+    facebook: {},
+  },
 };
 
 const prodConfig = {
@@ -43,12 +42,10 @@ const prodConfig = {
   oauth: {
     google: {
       clientID: '',
-      clientSecret: ''
+      clientSecret: '',
     },
-    facebook: {
-
-    }
-  }
+    facebook: {},
+  },
 };
 
 const defaultConfig = {

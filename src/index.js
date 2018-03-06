@@ -17,18 +17,22 @@ import app from './app';
 // Starting the Server
 app.listen(constants.PORT, err => {
   if (err) {
-    console.log(chalk.red(`
+    console.log(
+      chalk.red(`
       Cannot run! 😱
       ---
       Error: ${err}
-      `));
+      `),
+    );
   } else {
-    console.log(chalk.yellow.bold(`
+    console.log(
+      chalk.yellow.bold(`
       Yep, it's working! 🍺
       ---
       Server running on port: ${constants.PORT}
       ---
       Env: ${process.env.NODE_ENV}
-      `));
+      `),
+    );
   }
 });

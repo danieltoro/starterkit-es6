@@ -12,16 +12,19 @@ import User from '../models/User';
 import constants from '../config/constants';
 
 export function signToken(user) {
-  return JWT.sign({
-    iss: 'Starterkit',
-    sub: user.id,
-    iat: new Date().getTime(), // Current time
-    exp: new Date().setDate(new Date().getDate() + 1) // Current time + day ahead
-  }, constants.JWT_SECRET);
+  return JWT.sign(
+    {
+      iss: 'Starterkit',
+      sub: user.id,
+      iat: new Date().getTime(), // Current time
+      exp: new Date().setDate(new Date().getDate() + 1), // Current time + day ahead
+    },
+    constants.JWT_SECRET,
+  );
 }
 
 export default {
-  signUp: async (req, res, next) => {
+  signUp: async (req, res) => {
     const { email, password } = req.value.body;
     // Check if there is a user with the same email
     const foundUser = await User.findOne({ 'local.email': email });
@@ -33,8 +36,8 @@ export default {
       method: 'local',
       local: {
         email,
-        password
-      }
+        password,
+      },
     });
     await newUser.save();
     // Create the token
@@ -42,27 +45,22 @@ export default {
     // Respond with token
     return res.status(200).json({ token });
   },
-  signIn: async (req, res, next) => {
-    // Generate Token
-    const token = signToken(req.user);
-    // Respond with token
-    res.status(200).json({ token });
-    console.log('Successful login!');
-  },
-  googleOAuth: async (req, res, next) => {
+  signIn: async (req, res) => {
     // Generate Token
     const token = signToken(req.user);
     // Respond with token
     res.status(200).json({ token });
   },
-  facebookOAuth: async (req, res, next) => {
+  googleOAuth: async (req, res) => {
     // Generate Token
     const token = signToken(req.user);
     // Respond with token
     res.status(200).json({ token });
   },
-  secret: async (req, res, next) => {
-    console.log('I managed to get here!');
-    res.json({ secret: 'resource' });
+  facebookOAuth: async (req, res) => {
+    // Generate Token
+    const token = signToken(req.user);
+    // Respond with token
+    res.status(200).json({ token });
   },
 };

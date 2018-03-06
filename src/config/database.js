@@ -20,12 +20,18 @@ try {
 
 mongoose.connection
   .once('open', () =>
-    console.log(chalk.green.bold(`
+    console.log(
+      chalk.green.bold(`
       MongoDB is Running 🍃🍃🍃
-      `)))
+      `),
+    ),
+  )
   .on('error', error =>
-    console.log(chalk.red(`
+    console.log(
+      chalk.red(`
       Cannot run database! 😱
       ---
       Error: ${error}
-      `)));
+      `),
+    ),
+  );

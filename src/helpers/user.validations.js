@@ -11,7 +11,9 @@ export function validateBody(schema) {
     if (result.error) {
       return res.status(400).json(result.error);
     }
-    if (!req.value) { req.value = {}; }
+    if (!req.value) {
+      req.value = {};
+    }
     req.value.body = result.value;
     next();
   };
@@ -24,7 +26,6 @@ export const schemas = {
       .required(),
     password: Joi.string()
       .regex(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)
-      .required()
-  })
+      .required(),
+  }),
 };
-

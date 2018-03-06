@@ -7,42 +7,45 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 // Create a Schema
-const userSchema = new Schema({
-  method: {
-    type: String,
-    enum: ['local', 'google', 'facebook'],
-    required: true
-  },
-  local: {
-    email: {
+const userSchema = new Schema(
+  {
+    method: {
       type: String,
-      lowercase: true
+      enum: ['local', 'google', 'facebook'],
+      required: true,
     },
-    password: {
-      type: String
-    }
+    local: {
+      email: {
+        type: String,
+        lowercase: true,
+      },
+      password: {
+        type: String,
+      },
+    },
+    google: {
+      id: {
+        type: String,
+      },
+      email: {
+        type: String,
+        lowercase: true,
+      },
+    },
+    facebook: {
+      id: {
+        type: String,
+      },
+      email: {
+        type: String,
+        lowercase: true,
+      },
+    },
   },
-  google: {
-    id: {
-      type: String
-    },
-    email: {
-      type: String,
-      lowercase: true
-    }
-  },
-  facebook: {
-    id: {
-      type: String
-    },
-    email: {
-      type: String,
-      lowercase: true
-    }
-  }
-}, { timestamps: true });
+  { timestamps: true },
+);
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function(next) {
   try {
     if (this.method !== 'local') {
       next();
@@ -71,7 +74,7 @@ userSchema.methods = {
       _id: this._id,
       email: this.email,
     };
-  }
+  },
 };
 
 // Create a Model

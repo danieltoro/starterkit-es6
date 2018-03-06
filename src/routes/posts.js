@@ -22,27 +22,16 @@ routes.post(
   '/',
   authJwt,
   validate(postValidation.createPost),
-  postController.createPost
+  postController.createPost,
 );
-routes.get(
-  '/:id',
-  postController.getPostById
-);
-routes.get(
-  '/',
-  authJwt,
-  postController.getPostList
-);
+routes.get('/:id', postController.getPostById);
+routes.get('/', authJwt, postController.getPostList);
 routes.patch(
   '/:id',
   authJwt,
   validate(postValidation.updatePost),
-  postController.updatePost
+  postController.updatePost,
 );
-routes.delete(
-  '/:id',
-  authJwt,
-  postController.deletePost
-);
+routes.delete('/:id', authJwt, postController.deletePost);
 
 export default routes;
